@@ -50,17 +50,28 @@ const removeColorList = () => {
     const parent = themes[0].parentNode;
     for(let i = 0; i < themes.length; i++ ) {
             parent.removeChild(themes[i]);
-        }               
+    } 
+    
+    return themes;
 }
 
-const tShirtColors = (colorChoices) =>{
+const tShirtColors = (shirtColors) =>{
 
-    for(let i = 0; i < colorChoices.length; i++){
-        console.log(colorChoices[i]);
+    for(let i = 0; i < shirtColors.length; i++){
+        //console.log(shirtColors[i]);
     } 
 
 }
 
+
+const designChoices = () => {
+    const design = document.querySelector('#design');
+
+    design.addEventListener('change', (e) => {
+        console.log(e.target.value);
+
+    });
+}
 
 /*design.addEventListener('click', (e) => {
     const color = document.getElementById('color');
@@ -84,6 +95,7 @@ const tShirtColors = (colorChoices) =>{
 
 });
 */
- const colorOptions = createOption();
- removeColorList();
-//tShirtColorHidden();
+ createOption();
+ const shirtColors = removeColorList();
+ tShirtColors(shirtColors);
+ designChoices();
