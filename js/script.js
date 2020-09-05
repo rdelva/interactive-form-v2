@@ -68,33 +68,20 @@ const designChoices = () => {
     const design = document.querySelector('#design');
 
     design.addEventListener('change', (e) => {
-        console.log(e.target.value);
+        const selectedTheme = e.target.value;
+
+        if(selectedTheme == 'js puns'){
+            console.log('js puns');
+        } else if( selectedTheme == 'heart js'){
+            console.log('heart js');
+        } else {
+            console.log('Select Theme');
+        }
 
     });
 }
 
-/*design.addEventListener('click', (e) => {
-    const color = document.getElementById('color');
-    const colorOptions = color.getElementsByTagName('option');
-    const parent  = colorOptions[0].parentNode;
 
-    console.log(design.value);
-
-    if(design.value  == 'Select Theme') {
-       // tShirtColorHidden();     
-        
-    } else if (design.value == '') {
-       /* // put colorOptionList back into the color 
-            //make item selectable
-            for(let i = 0; i < colorOptionsList.length; i++){
-                parent.appendChild(colorOptionsList[i]);
-            } 
-
-           console.log(); 
-    }
-
-});
-*/
  createOption();
  const shirtColors = removeColorList();
  tShirtColors(shirtColors);
