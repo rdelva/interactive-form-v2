@@ -56,11 +56,22 @@ const removeColorList = () => {
 }
 
 const tShirtColors = (shirtColors) =>{
+    // seperates the tshirtColors into two seperate lists based on shirt design
+    const jsPunsList = [];
+    const heartJSList = [];
 
     for(let i = 0; i < shirtColors.length; i++){
-        //console.log(shirtColors[i]);
+      
+        if(shirtColors[i].innerHTML.includes('JS Puns shirt only')){
+            jsPunsList.push(shirtColors[i]);
+        } else {
+            heartJSList.push(shirtColors[i]);
+
+        }        
     } 
 
+    console.log(jsPunsList[0]);
+    console.log(heartJSList[0]);
 }
 
 
