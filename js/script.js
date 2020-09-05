@@ -24,44 +24,34 @@ title.addEventListener('click', (e) => {
 // if remained as default. set color to Please select a T-shirt theme
 
 
-const createDropDownColorOption = () => {
+const createOption = () => {
     //create option called "Please select a T-shirt theme"
 
     const color = document.getElementById('color');    
     const colorOptions = color.getElementsByTagName('option'); //grabs the colorOptions list for later usage
+   
     const parent  = colorOptions[0].parentNode;
 
     const option = document.createElement('option');
     option.innerHTML = 'Please select a T-shirt theme';
-  
-      // add colorOption before the first item in the drop down menu.
-          //set the colorOption value to the color drop down menu
+    
+    // add colorOption before the first item in the drop down menu.          
       parent.insertBefore(option, colorOptions[0]);
-      color.value = colorOptions[0].value;
-  
-      // select the color Options that have the value attribute and assign it to html
-      const colorOptionsList = color.querySelectorAll('[value]');
+      color.value = colorOptions[0].value;  //set the Color drop down menu to Default
 
-     
-      // tShirtColors(colorOptions);
-      //tShirtColorHidden(colorOptions, parent);
-
+    //return  colorOptions;    
 }
 
-/*
-const removeColorList = (colorList, parent) => {
-   
 
-    console.log(colorList.length);
-    if(design.value  == 'Select Theme') {      
-
-        //Remove the colors after the first option 
-        for(let i = 0; i < colorList.length; i++ ) {
-            parent.removeChild(colorList[i]);
-        }         
-    }
-
-}*/
+const removeColorList = () => {
+  
+    //removes the color choices in drop down menu
+    const themes = color.querySelectorAll('[value]'); 
+    const parent = themes[0].parentNode;
+    for(let i = 0; i < themes.length; i++ ) {
+            parent.removeChild(themes[i]);
+        }               
+}
 
 const tShirtColors = (colorChoices) =>{
 
@@ -94,6 +84,6 @@ const tShirtColors = (colorChoices) =>{
 
 });
 */
-
-createDropDownColorOption();
+ const colorOptions = createOption();
+ removeColorList();
 //tShirtColorHidden();
