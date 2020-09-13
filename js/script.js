@@ -7,9 +7,7 @@ name.focus();
 
 
 title.addEventListener('change', (e) => {
-    //not sure if i did this part right
-    const title = document.getElementById('title');
-    console.log(title.value);
+ 
     //if user selects other, other-title textbox will be made visible
     const otherTitle = document.getElementById('other-title');
 
@@ -70,26 +68,54 @@ const tShirtColors = (shirtColors) =>{
         }        
     } 
     // send the two arrays into designChoices() in order to be appended based on choice
-    console.log(jsPunsList[0]);
-    console.log(heartJSList[0]);
+   designChoices(jsPunsList, heartJSList);
 }
 
 
-const designChoices = () => {
+const designChoices = (jsPuns, heartJS) => {
+
+
     const design = document.querySelector('#design');
+    if( jsPuns != undefined || heartJS != undefined){
 
-    design.addEventListener('change', (e) => {
-        const selectedTheme = e.target.value;
+        
+        design.addEventListener('change', (e) => {
+            const selectedTheme = e.target.value;
+            const color = document.getElementById('color');
+            const option  = color.querySelectorAll('option'); 
+            const parent = option[0].parentNode; //uses the first option to get the parent
+            
 
-        if(selectedTheme == 'js puns'){
-            console.log('js puns');
-        } else if( selectedTheme == 'heart js'){
-            console.log('heart js');
-        } else {
-            console.log('Select Theme');
-        }
+            if(selectedTheme == 'js puns'){
+                if(option.length > 1 ){
+                    removeColorList();
+                    for(let i = 0; i < heartJS.length; i++){
+                        parent.appendChild(jsPuns[i]);
+                    }
+                } else {
+                    
+                    for(let i = 0; i < jsPuns.length; i++){
+                        parent.appendChild(jsPuns[i]);
+                    }
+                }              
+              
+            } else if( selectedTheme == 'heart js'){
+                if(option.length > 1 ){
+                    removeColorList();
+                    for(let i = 0; i < heartJS.length; i++){
+                        parent.appendChild(heartJS[i]);
+                    }
+                } else {
+                    for(let i = 0; i < heartJS.length; i++){
+                        parent.appendChild(heartJS[i]);
+                    }
+                }             
+            } else {
+                removeColorList();
+            }
 
-    });
+        });
+    }
 }
 
 
