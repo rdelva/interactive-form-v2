@@ -6,7 +6,7 @@ name.focus();
 
 
 
-title.addEventListener('click', (e) => {
+title.addEventListener('change', (e) => {
     //not sure if i did this part right
     const title = document.getElementById('title');
     console.log(title.value);
@@ -69,7 +69,7 @@ const tShirtColors = (shirtColors) =>{
 
         }        
     } 
-
+    // send the two arrays into designChoices() in order to be appended based on choice
     console.log(jsPunsList[0]);
     console.log(heartJSList[0]);
 }
