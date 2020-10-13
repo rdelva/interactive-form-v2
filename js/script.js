@@ -126,9 +126,22 @@ const registerActivities = () => {
     const activities =  document.querySelector('.activities'); 
     activities.appendChild(price);
 
-    
+    activities.addEventListener('click', (e) => {
+        const input = e.target;
+        let itemPrice = 0;
+        
+        if(e.target.tagName == 'INPUT'){          
+            itemPrice = parseFloat(input.getAttribute("data-cost"));
+           
+            if (input.checked == true) {
+                itemPrice += itemPrice;
+            } else {
+                itemPrice -= itemPrice;
+            }                        
+        }
 
-
+        console.log("Price amount " + itemPrice);
+    });
 }
 
  createOption();
