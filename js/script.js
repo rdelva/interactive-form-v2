@@ -118,8 +118,21 @@ const designChoices = (jsPuns, heartJS) => {
     }
 }
 
+const registerActivities = () => {
+    let price = document.createElement('div');
+    price.id ="price"
+    price.innerHTML = "Price";
+    console.log(price);
+    const activities =  document.querySelector('.activities'); 
+    activities.appendChild(price);
+
+    
+
+
+}
 
  createOption();
  const shirtColors = removeColorList();
  tShirtColors(shirtColors);
  designChoices();
+registerActivities();
