@@ -122,25 +122,29 @@ const registerActivities = () => {
     let price = document.createElement('div');
     price.id ="price"
     price.innerHTML = "Price";
-    console.log(price);
+   // console.log(price);
     const activities =  document.querySelector('.activities'); 
     activities.appendChild(price);
 
-    activities.addEventListener('click', (e) => {
-        const input = e.target;
-        let itemPrice = 0;
+    activities.addEventListener('change', (e) => {
+        let input = e.target;
+        let selectedPrice = 0;
+        let totalPrice = 0;
         
         if(e.target.tagName == 'INPUT'){          
-            itemPrice = parseFloat(input.getAttribute("data-cost"));
-           
+            selectedPrice = parseFloat(input.getAttribute("data-cost"));
+
             if (input.checked == true) {
-                itemPrice += itemPrice;
+                selectedPrice = selectedPrice;
+                console.log(totalPrice);     
             } else {
-                itemPrice -= itemPrice;
-            }                        
+                selectedPrice =- selectedPrice;
+                console.log(totalPrice);     
+            }     
+                       
         }
 
-        console.log("Price amount " + itemPrice);
+    
     });
 }
 
