@@ -125,20 +125,19 @@ const registerActivities = () => {
    // console.log(price);
     const activities =  document.querySelector('.activities'); 
     activities.appendChild(price);
-
+    let selectedPrice = 0;
+    let totalPrice = 0;
     activities.addEventListener('change', (e) => {
-        let input = e.target;
-        let selectedPrice = 0;
-        let totalPrice = 0;
+        let input = e.target;       
         
         if(e.target.tagName == 'INPUT'){          
             selectedPrice = parseFloat(input.getAttribute("data-cost"));
-
+            
             if (input.checked == true) {
-                selectedPrice = selectedPrice;
+                totalPrice += selectedPrice;
                 console.log(totalPrice);     
             } else {
-                selectedPrice =- selectedPrice;
+                totalPrice -= selectedPrice;
                 console.log(totalPrice);     
             }     
                        
