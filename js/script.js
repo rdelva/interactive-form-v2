@@ -127,11 +127,18 @@ const registerActivities = () => {
     activities.appendChild(price);
     let selectedPrice = 0;
     let totalPrice = 0;
+    
+    let dayAndTime = activities.querySelectorAll("[data-day-and-time]");
+    console.log(dayAndTime);
+
     activities.addEventListener('change', (e) => {
         let input = e.target;       
         
         if(e.target.tagName == 'INPUT'){          
             selectedPrice = parseFloat(input.getAttribute("data-cost"));
+            schedule.push(selectedPrice);
+
+            
             
             if (input.checked == true) {
                 totalPrice += selectedPrice;
