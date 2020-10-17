@@ -125,34 +125,61 @@ const registerActivities = () => {
    // console.log(price);
     const activities =  document.querySelector('.activities'); 
     activities.appendChild(price);
-    let selectedPrice = 0;
+    let selectedActivityPrice = 0;
     let totalPrice = 0;
     
-    let dayAndTime = activities.querySelectorAll("[data-day-and-time]");
-    console.log(dayAndTime);
+    //let dayAndTime = activities.querySelectorAll("[data-day-and-time]");
+    //console.log(dayAndTime);
 
     activities.addEventListener('change', (e) => {
-        let input = e.target;       
+        let selectedActivity = e.target;       
         
-        if(e.target.tagName == 'INPUT'){          
-            selectedPrice = parseFloat(input.getAttribute("data-cost"));
-            schedule.push(selectedPrice);
+        if(selectedActivity.tagName == 'INPUT'){          
 
+            selectedActivityPrice = parseFloat(selectedActivity.getAttribute("data-cost"));                     
             
-            
-            if (input.checked == true) {
-                totalPrice += selectedPrice;
-                console.log(totalPrice);     
+            selectedActivityTime = selectedActivity.getAttribute("data-day-and-time");
+
+            let activityListDayandTime = activities.querySelectorAll("[data-day-and-time]");
+
+            console.log(activityListDayandTime);
+            //check off item
+                //if checked item day and time matches  with activities disable checkbox and make text bold
+
+            if(selectedActivity.checked == true){
+                totalPrice += selectedActivityPrice;
+                console.log(totalPrice);   
+                for(let i = 0; i < activityListDayandTime.length; i++){
+                   
+                    if((selectedActivityTime == activityListDayandTime[i].getAttribute("data-day-and-time")) && (activityListDayandTime[i].checked == false)){
+                        activityListDayandTime[i].disabled = true;
+                        let label = activityListDayandTime[i].parentNode;
+                        label.style.color = "grey";
+                        label.style.fontWeight = "bold";
+                        selectedActivity.disabled  = false;
+                    }
+                }                
             } else {
-                totalPrice -= selectedPrice;
-                console.log(totalPrice);     
-            }     
-                       
+                totalPrice -= selectedActivityPrice;
+                console.log(totalPrice);   
+
+               for(let i = 0; i < activityListDayandTime.length; i++){
+                   
+                    if(activityListDayandTime[i].disabled == true){
+                        activityListDayandTime[i].disabled = false;
+                        let label = activityListDayandTime[i].parentNode;
+                        label.style.color = "black";
+                        label.style.fontWeight = "normal";
+                    }
+                }
+            }           
+
+                        
         }
 
     
-    });
-}
+    }); // end of activities event
+} // end of register activities
 
  createOption();
  const shirtColors = removeColorList();
