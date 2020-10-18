@@ -121,15 +121,14 @@ const designChoices = (jsPuns, heartJS) => {
 const registerActivities = () => {
     let price = document.createElement('div');
     price.id ="price"
-    price.innerHTML = "Price";
-   // console.log(price);
+   
+  
     const activities =  document.querySelector('.activities'); 
     activities.appendChild(price);
     let selectedActivityPrice = 0;
     let totalPrice = 0;
     
-    //let dayAndTime = activities.querySelectorAll("[data-day-and-time]");
-    //console.log(dayAndTime);
+  
 
     activities.addEventListener('change', (e) => {
         let selectedActivity = e.target;       
@@ -148,7 +147,7 @@ const registerActivities = () => {
 
             if(selectedActivity.checked == true){
                 totalPrice += selectedActivityPrice;
-                console.log(totalPrice);   
+                price.innerHTML = `<strong>Total: $${totalPrice}</strong>`;
                 for(let i = 0; i < activityListDayandTime.length; i++){
                    
                     if((selectedActivityTime == activityListDayandTime[i].getAttribute("data-day-and-time")) && (activityListDayandTime[i].checked == false)){
@@ -161,7 +160,7 @@ const registerActivities = () => {
                 }                
             } else {
                 totalPrice -= selectedActivityPrice;
-                console.log(totalPrice);   
+                price.innerHTML = `<strong>Total:$${totalPrice}</strong>`;
 
                for(let i = 0; i < activityListDayandTime.length; i++){
                    
