@@ -220,9 +220,51 @@ const paymentInfo = () => {
     });
 }
 
+const verifyBasicInfo = () => {
+    const name = document.getElementById("name");
+    const mail = document.getElementById("mail");
+    const nameLabel = document.querySelector("[for=name]");
+    const mailLabel = document.querySelector("[for=mail]");
+
+    if(name.value == ""){
+        nameLabel.style.color = "red";
+        name.style.border = "red";
+    } else {
+        nameLabel.style.color = "black";
+        name.style.border = "black";
+    }
+    
+    if(mail.value == ""){
+        mailLabel.style.color = "red";
+        mail.style.border = "red";
+    }else {
+        mailLabel.style.color = "black";
+        mail.style.border = "black";
+    }
+    
+}
+
+const verifyCCInfo = () => {
+  
+}
+
+
+const submitAndVerify =  () => {
+    const submit = document.querySelector("[type = submit]");
+    console.log(submit);
+    submit.addEventListener("click", (e) => {
+        e.preventDefault();
+        verifyBasicInfo();
+
+    });
+
+}
+
+
 createOption();
 const shirtColors = removeColorList();
 tShirtColors(shirtColors);
 designChoices();
 registerActivities();
 paymentInfo();
+submitAndVerify();
