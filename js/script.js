@@ -244,6 +244,27 @@ const verifyBasicInfo = () => {
     
 }
 
+const verifyRegActivities = () => {
+
+    const activities =  document.querySelector('.activities'); 
+    const activityListItems = activities.querySelectorAll("input");
+    let checked = 0; //checks to see how many is checked
+
+    for(let i = 0; i < activityListItems.length; i++){
+        if(activityListItems[i].checked == true){
+            checked++;
+        }
+    }
+
+    if(checked == 0) {
+        console.log("no item was checked");
+    } else {
+        console.log(`${checked} items was checked`);
+    }
+
+    
+}
+
 const verifyCCInfo = () => {
   
 }
@@ -255,6 +276,7 @@ const submitAndVerify =  () => {
     submit.addEventListener("click", (e) => {
         e.preventDefault();
         verifyBasicInfo();
+        verifyRegActivities();
 
     });
 
