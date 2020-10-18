@@ -180,8 +180,49 @@ const registerActivities = () => {
     }); // end of activities event
 } // end of register activities
 
- createOption();
- const shirtColors = removeColorList();
- tShirtColors(shirtColors);
- designChoices();
+
+
+
+const paymentInfo = () => {
+    const paymentInfo = document.getElementById("payment");
+    const creditCard = document.getElementById("credit-card");
+    const payPal = document.getElementById("paypal");
+    const bitcoin = document.getElementById("bitcoin");
+
+    creditCard.style.display = "none";
+    payPal.style.display = "none";
+    bitcoin.style.display = "none";
+
+
+    paymentInfo.addEventListener("change", (e) => {
+        let  paymentMethod = e.target.value;
+        if (paymentMethod == "select method"){
+            creditCard.style.display = "none"
+            payPal.style.display = "none";
+            bitcoin.style.display = "none";
+        }
+        else if (paymentMethod == "credit card"){ 
+            creditCard.style.display = "block";
+            payPal.style.display = "none";
+            bitcoin.style.display = "none";
+        } 
+        else if (paymentMethod  == "paypal"){ 
+            payPal.style.display = "block";
+            creditCard.style.display = "none";
+            bitcoin.style.display = "none";
+        } 
+        else {
+            bitcoin.style.display = "block";
+            creditCard.style.display = "none";
+            payPal.style.display = "none";
+        }
+
+    });
+}
+
+createOption();
+const shirtColors = removeColorList();
+tShirtColors(shirtColors);
+designChoices();
 registerActivities();
+paymentInfo();
