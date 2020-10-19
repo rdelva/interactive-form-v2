@@ -248,7 +248,9 @@ const verifyRegActivities = () => {
 
     const activities =  document.querySelector('.activities'); 
     const activityListItems = activities.querySelectorAll("input");
-    let checked = 0; //checks to see how many is checked
+    const legend = activities.querySelector("legend");
+
+    let checked = 0; //keeps track of how many items was checked
 
     for(let i = 0; i < activityListItems.length; i++){
         if(activityListItems[i].checked == true){
@@ -258,15 +260,27 @@ const verifyRegActivities = () => {
 
     if(checked == 0) {
         console.log("no item was checked");
+        legend.style.color = "red";
     } else {
         console.log(`${checked} items was checked`);
+        legend.style.color = "black";
+
     }
 
     
 }
 
 const verifyCCInfo = () => {
-  
+    const ccNum = document.getElementById("cc-num");
+    const zip = document.getElementById("zip");
+    const cvv = document.getElementById("cvv");
+
+    const ccRegex = /[0-9]{13,17}/;
+    const zipRegex = /[0-9]{4}/;
+    const ccvRegex  = /[0-9]{3}/
+    const ccNums  = ccNum.value;
+    const result = regex.test(ccNums);
+    console.log(result); 
 }
 
 
@@ -277,6 +291,7 @@ const submitAndVerify =  () => {
         e.preventDefault();
         verifyBasicInfo();
         verifyRegActivities();
+        verifyCCInfo();
 
     });
 
