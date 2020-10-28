@@ -10,9 +10,11 @@ title.addEventListener('change', (e) => {
  
     //if user selects other, other-title textbox will be made visible
     const otherTitle = document.getElementById('other-title');
+    otherTitle.name = "job_role_other";
 
     if (title.value == 'other'){
-        otherTitle.classList.remove('is-hidden');    
+        otherTitle.removeAttribute('class');
+           
     } else {
         otherTitle.classList.add('is-hidden');
     } 
@@ -271,16 +273,35 @@ const verifyRegActivities = () => {
 }
 
 const verifyCCInfo = () => {
+    
+   
     const ccNum = document.getElementById("cc-num");
     const zip = document.getElementById("zip");
     const cvv = document.getElementById("cvv");
+
 
     const ccRegex = /[0-9]{13,17}/;
     const zipRegex = /[0-9]{4}/;
     const ccvRegex  = /[0-9]{3}/
     const ccNums  = ccNum.value;
-    const result = regex.test(ccNums);
-    console.log(result); 
+    const ccResult = ccRegex.test(ccNums);
+    const zipResult = zipRegex.test(zip);
+    const ccvResult = ccvRegex.test(cvv);
+
+    
+    console.log(ccResult); 
+
+    if(ccResult == false && zipResult == false && ccvResult == false){
+            console.log('Hi');
+            const payment = document.getElementById('payment');
+
+            const parent = payment.parentNode;
+        
+            console.log(parent);
+            const legend = parent.querySelector('legend');
+        
+            legend.style.color = 'red';
+    }
 }
 
 
