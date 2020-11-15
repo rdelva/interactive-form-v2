@@ -222,20 +222,29 @@ const paymentInfo = () => {
     });
 }
 
-const verifyBasicInfo = () => {
+const verifyName  = () => {
     const name = document.getElementById("name");
-    const mail = document.getElementById("mail");
     const nameLabel = document.querySelector("[for=name]");
-    const mailLabel = document.querySelector("[for=mail]");
+    console.log(name.value);
 
-    if(name.value == "" || name.value.length == 0){
+    //checks to see if name is blank
+    if(name.value == ""){
         nameLabel.style.color = "red";
         name.style.border = "red";
     } else {
         nameLabel.style.color = "black";
         name.style.border = "black";
     }
+   
+}
+
+const verifyEmail = () => {
     
+    const mail = document.getElementById("mail");
+    const mailLabel = document.querySelector("[for=mail]");   
+    console.log(mail.value);
+    
+    //checks to see if email is blank
     if(mail.value == ""){
         mailLabel.style.color = "red";
         mail.style.border = "red";
@@ -243,8 +252,24 @@ const verifyBasicInfo = () => {
         mailLabel.style.color = "black";
         mail.style.border = "black";
     }
+
+    //check to see if email is valid
+
+    emailRegex = /[^@]+@[^@.]+\.[a-z]+$/i;
+
+    console.log(emailRegex.test(mail.value));
     
+    if (emailRegex.test(mail.value) == false){
+        mailLabel.style.color = "red";
+        mail.style.border = "red";
+    } else {
+        mailLabel.style.color = "black";
+        mail.style.border = "black";
+    }
+
+
 }
+
 
 const verifyRegActivities = () => {
 
@@ -307,6 +332,21 @@ const verifyCCInfo = () => {
 }
 
 
+const realTimeChecking  = () => {
+    //Real Time checking
+    const name = document.getElementById("name");
+    const mail = document.getElementById("mail");
+    name.addEventListener('keyup', (e) =>{
+        verifyName();
+       
+   });
+
+   mail.addEventListener('keyup', (e) =>{
+        verifyEmail();
+   });
+}
+
+
 const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
     console.log(submit);
@@ -315,6 +355,8 @@ const submitAndVerify =  () => {
         verifyBasicInfo();
         verifyRegActivities();
         verifyCCInfo();
+        verifyName();
+        verifyEmail();
 
     });
 
@@ -327,4 +369,5 @@ tShirtColors(shirtColors);
 designChoices();
 registerActivities();
 paymentInfo();
+realTimeChecking();
 submitAndVerify();
