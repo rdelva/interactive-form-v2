@@ -336,6 +336,7 @@ const realTimeChecking  = () => {
     //Real Time checking
     const name = document.getElementById("name");
     const mail = document.getElementById("mail");
+    const activities =  document.querySelector('.activities'); 
     name.addEventListener('keyup', (e) =>{
         verifyName();
        
@@ -344,15 +345,24 @@ const realTimeChecking  = () => {
    mail.addEventListener('keyup', (e) =>{
         verifyEmail();
    });
-}
+
+   //real time checking for Register Activities
+   
+   activities.addEventListener('change', (e) => {
+        if(e.target.tagName == 'INPUT'){    
+            console.log("Hi");
+            verifyRegActivities();
+            
+        }
+    });
+}// end of realTime checking
 
 
 const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
     console.log(submit);
     submit.addEventListener("click", (e) => {
-        e.preventDefault();
-        verifyBasicInfo();
+        e.preventDefault();      
         verifyRegActivities();
         verifyCCInfo();
         verifyName();
