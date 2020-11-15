@@ -228,7 +228,7 @@ const verifyBasicInfo = () => {
     const nameLabel = document.querySelector("[for=name]");
     const mailLabel = document.querySelector("[for=mail]");
 
-    if(name.value == ""){
+    if(name.value == "" || name.value.length == 0){
         nameLabel.style.color = "red";
         name.style.border = "red";
     } else {
@@ -274,33 +274,35 @@ const verifyRegActivities = () => {
 
 const verifyCCInfo = () => {
     
-   
+    const payment = document.getElementById('payment');
+    const parent = payment.parentNode;        
+    const legend = parent.querySelector('legend');      
+
     const ccNum = document.getElementById("cc-num");
     const zip = document.getElementById("zip");
     const cvv = document.getElementById("cvv");
 
 
-    const ccRegex = /[0-9]{13,17}/;
-    const zipRegex = /[0-9]{4}/;
+    const ccRegex = /[0-9]{13,16}/;
+    const zipRegex = /[0-9]{5}/;
     const ccvRegex  = /[0-9]{3}/
-    const ccNums  = ccNum.value;
-    const ccResult = ccRegex.test(ccNums);
-    const zipResult = zipRegex.test(zip);
-    const ccvResult = ccvRegex.test(cvv);
 
+    const ccResult = ccRegex.test(ccNum.value);
+    const zipResult = zipRegex.test(zip.value);
+    const ccvResult = ccvRegex.test(cvv.value);
+    
     
     console.log(ccResult); 
-
+    console.log(zipResult); 
+    console.log(ccvResult); 
+    
     if(ccResult == false && zipResult == false && ccvResult == false){
-            console.log('Hi');
-            const payment = document.getElementById('payment');
+         
+         legend.style.color = 'red';
 
-            const parent = payment.parentNode;
-        
-            console.log(parent);
-            const legend = parent.querySelector('legend');
-        
-            legend.style.color = 'red';
+    } else {
+        legend.style.color = 'black';
+
     }
 }
 
