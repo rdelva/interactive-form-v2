@@ -226,9 +226,13 @@ const verifyName  = () => {
     const name = document.getElementById("name");
     const nameLabel = document.querySelector("[for=name]");
     console.log(name.value);
+    const nameRegex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+
+    console.log(nameRegex.test(name.value));
+
 
     //checks to see if name is blank
-    if(name.value == ""){
+    if(name.value == "" || nameRegex.test(name.value) == false){
         nameLabel.style.color = "red";
         name.style.border = "red";
     } else {
@@ -255,7 +259,7 @@ const verifyEmail = () => {
 
     //check to see if email is valid
 
-    emailRegex = /[^@]+@[^@.]+\.[a-z]+$/i;
+    const emailRegex = /[^@]+@[^@.]+\.[a-z]+$/i;
 
     console.log(emailRegex.test(mail.value));
     
@@ -360,7 +364,7 @@ const realTimeChecking  = () => {
 
 const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
-    console.log(submit);
+    
     submit.addEventListener("click", (e) => {
         e.preventDefault();      
         verifyRegActivities();
