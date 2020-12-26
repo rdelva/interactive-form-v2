@@ -143,7 +143,7 @@ const registerActivities = () => {
 
             let activityListDayandTime = activities.querySelectorAll("[data-day-and-time]");
 
-            console.log(activityListDayandTime);
+            //console.log(activityListDayandTime);
             //check off item
                 //if checked item day and time matches  with activities disable checkbox and make text bold
 
@@ -222,19 +222,39 @@ const paymentInfo = () => {
     });
 }
 
+const errorMessages = () => {
+    //const finding the parent node to use for insertBefore
+    const name =  document.getElementById("name");
+    const parent = name.parentNode;
+
+        //error messages setup
+
+        const div  = document.createElement('div');
+        const message = `Please enter your name`;
+        div.innerHTML = message;
+        div.style.color = "red";
+        //div.style.display = 'none';
+        parent.insertBefore(div,name);
+
+}
+
+
 const verifyName  = () => {
     const name = document.getElementById("name");
     const nameLabel = document.querySelector("[for=name]");
-    console.log(name.value);
+    //console.log(name.value);
     const nameRegex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
 
-    console.log(nameRegex.test(name.value));
+    //console.log(nameRegex.test(name.value));
 
+
+    
 
     //checks to see if name is blank
     if(name.value == "" || nameRegex.test(name.value) == false){
         nameLabel.style.color = "red";
         name.style.border = "red";
+
     } else {
         nameLabel.style.color = "black";
         name.style.border = "black";
@@ -246,7 +266,7 @@ const verifyEmail = () => {
     
     const mail = document.getElementById("mail");
     const mailLabel = document.querySelector("[for=mail]");   
-    console.log(mail.value);
+    //console.log(mail.value);
     
     //checks to see if email is blank
     if(mail.value == ""){
@@ -261,7 +281,7 @@ const verifyEmail = () => {
 
     const emailRegex = /[^@]+@[^@.]+\.[a-z]+$/i;
 
-    console.log(emailRegex.test(mail.value));
+    //console.log(emailRegex.test(mail.value));
     
     if (emailRegex.test(mail.value) == false){
         mailLabel.style.color = "red";
@@ -290,10 +310,10 @@ const verifyRegActivities = () => {
     }
 
     if(checked == 0) {
-        console.log("no item was checked");
+        //console.log("no item was checked");
         legend.style.color = "red";
     } else {
-        console.log(`${checked} items was checked`);
+       // console.log(`${checked} items was checked`);
         legend.style.color = "black";
 
     }
@@ -301,7 +321,10 @@ const verifyRegActivities = () => {
     
 }
 
-const verifyCCInfo = () => {
+//checks if the Payment Info was selected
+
+
+const verifyPaymentInfo = () => {
     
     const payment = document.getElementById('payment');
     const parent = payment.parentNode;        
@@ -325,13 +348,12 @@ const verifyCCInfo = () => {
     console.log(zipResult); 
     console.log(ccvResult); 
     
-    if(ccResult == false && zipResult == false && ccvResult == false){
-         
-         legend.style.color = 'red';
-
-    } else {
+    if(ccResult == true && zipResult == true && ccvResult == true){
         legend.style.color = 'black';
-
+       // console.log ("turns black");
+    } else {        
+        legend.style.color = 'red';      
+      
     }
 }
 
@@ -354,7 +376,7 @@ const realTimeChecking  = () => {
    
    activities.addEventListener('change', (e) => {
         if(e.target.tagName == 'INPUT'){    
-            console.log("Hi");
+           // console.log("Hi");
             verifyRegActivities();
             
         }
@@ -368,7 +390,7 @@ const submitAndVerify =  () => {
     submit.addEventListener("click", (e) => {
         e.preventDefault();      
         verifyRegActivities();
-        verifyCCInfo();
+        verifyPaymentInfo();
         verifyName();
         verifyEmail();
 
@@ -376,7 +398,7 @@ const submitAndVerify =  () => {
 
 }
 
-
+errorMessages();
 createOption();
 const shirtColors = removeColorList();
 tShirtColors(shirtColors);
