@@ -223,11 +223,11 @@ const paymentInfo = () => {
 }
 // setting up errorMessages for the forms 
 
-const createErrorMessage = () => {
+/*const createErrorMessage = () => {
     const div  = document.createElement('div');
     div.style.color = "red";
 
-}
+}*/
 
 
 const errorMessages = () => {
@@ -438,7 +438,7 @@ const submitAndVerify =  () => {
 
 }
 
-createErrorMessage();
+//createErrorMessage();
 errorMessages();
 createOption();
 const shirtColors = removeColorList();
