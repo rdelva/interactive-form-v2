@@ -221,43 +221,79 @@ const paymentInfo = () => {
 
     });
 }
+// setting up errorMessages for the forms 
+
+const createErrorMessage = () => {
+    const div  = document.createElement('div');
+    div.style.color = "red";
+
+}
+
 
 const errorMessages = () => {
     //const finding the parent node to use for insertBefore
     const name =  document.getElementById("name");
+    const email =  document.getElementById("mail");
+
     const parent = name.parentNode;
+    const parentEmail = email.parentNode;
+
 
         //error messages setup
-
         const div  = document.createElement('div');
         const message = `Please enter your name`;
         div.innerHTML = message;
         div.style.color = "red";
-        //div.style.display = 'none';
         parent.insertBefore(div,name);
+        div.classList.add("nameError");
+        const nameErrorMessage = document.querySelector(".nameError");
+        nameErrorMessage.style.display = 'none';
+
+
+
+        //email  error  messages
+        const divEmail  = document.createElement('div');
+
+        divEmail.innerHTML = `Please enter your email`;
+        divEmail.classList.add("emailErrorMessage");
+        divEmail.style.color = "red";
+        parentEmail.insertBefore(divEmail,email);
+        divEmail.classList.add("emailErrorMessage");
+        const emailErrorMessage = document.querySelector(".emailErrorMessage");
+        emailErrorMessage.style.display = 'none';
+
 
 }
+
+
+
 
 
 const verifyName  = () => {
     const name = document.getElementById("name");
     const nameLabel = document.querySelector("[for=name]");
+    const nameErrorMessage = document.querySelector(".nameError");
+
+
     //console.log(name.value);
     const nameRegex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
 
     //console.log(nameRegex.test(name.value));
 
 
-    
-
     //checks to see if name is blank
     if(name.value == "" || nameRegex.test(name.value) == false){
         nameLabel.style.color = "red";
         name.style.border = "red";
+        nameErrorMessage.style.display = 'block';
+        
+
 
     } else {
         nameLabel.style.color = "black";
         name.style.border = "black";
+        nameErrorMessage.style.display = 'none';
+       
     }
    
 }
@@ -266,15 +302,19 @@ const verifyEmail = () => {
     
     const mail = document.getElementById("mail");
     const mailLabel = document.querySelector("[for=mail]");   
-    //console.log(mail.value);
-    
+    const emailErrorMessage = document.querySelector(".emailErrorMessage");
+
     //checks to see if email is blank
     if(mail.value == ""){
         mailLabel.style.color = "red";
         mail.style.border = "red";
+        emailErrorMessage.style.display = 'block';
+
     }else {
         mailLabel.style.color = "black";
         mail.style.border = "black";
+        emailErrorMessage.style.display = 'none';
+
     }
 
     //check to see if email is valid
@@ -398,6 +438,7 @@ const submitAndVerify =  () => {
 
 }
 
+createErrorMessage();
 errorMessages();
 createOption();
 const shirtColors = removeColorList();
