@@ -198,7 +198,15 @@ const paymentInfo = () => {
 
 
     //Sets it to Credit Card Options
-    paymentInfo.options[1].setAttribute("selected", "selected");
+    /*Note: if the  payment option list ever changes or increase it will allways look for the credit card option
+    */
+   
+    
+    for(let i = 0; i < paymentInfo.options.length; i++){
+        if(paymentInfo.options[i].value == 'credit card' ){
+            paymentInfo.options[i].setAttribute("selected", "selected");            
+        }
+    }
 
 
     paymentInfo.addEventListener("change", (e) => {
