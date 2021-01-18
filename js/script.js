@@ -191,9 +191,14 @@ const paymentInfo = () => {
     const payPal = document.getElementById("paypal");
     const bitcoin = document.getElementById("bitcoin");
 
-    creditCard.style.display = "none";
+    
+    creditCard.style.display = "block";
     payPal.style.display = "none";
     bitcoin.style.display = "none";
+
+
+    //Sets it to Credit Card Options
+    paymentInfo.options[1].setAttribute("selected", "selected");
 
 
     paymentInfo.addEventListener("change", (e) => {
