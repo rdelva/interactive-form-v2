@@ -401,6 +401,7 @@ const verifyPaymentInfo = () => {
     console.log(zipResult); 
     console.log(ccvResult); 
     
+    //Credit Card Verification
     if(ccResult == true && zipResult == true && ccvResult == true){
         legend.style.color = 'black';
        // console.log ("turns black");
