@@ -78,6 +78,8 @@ const designChoices = (jsPuns, heartJS) => {
 
 
     const design = document.querySelector('#design');
+ 
+
     if( jsPuns != undefined || heartJS != undefined){
 
         
@@ -113,7 +115,11 @@ const designChoices = (jsPuns, heartJS) => {
                     }
                 }             
             } else {
+                shirtLegend.style.color = 'red';
+                console.log(shirtLegend);
+
                 removeColorList();
+
             }
 
         });
@@ -282,6 +288,7 @@ const errorMessages = () => {
 
 
 
+
 const verifyName  = () => {
     const name = document.getElementById("name");
     const nameLabel = document.querySelector("[for=name]");
@@ -374,6 +381,24 @@ const verifyRegActivities = () => {
     
 }
 
+//Verifys if a t-shirt was selected
+const verifyTShirt = () => {
+    const shirtSection = document.querySelector(".shirt");
+    const shirtLegend = shirtSection.querySelector("legend");
+    const shirtColor = document.querySelector("#color");
+
+
+    const design = document.querySelector("#design");
+   
+    if(design.value == "Select Theme" || shirtColor.value == "Please select a T-shirt theme") {
+        shirtLegend.style.color ="red";
+    } else {
+        shirtLegend.style.color ="black";
+
+    }
+
+}
+
 //checks if the Payment Info was selected
 
 
@@ -456,6 +481,7 @@ const submitAndVerify =  () => {
         verifyPaymentInfo();
         verifyName();
         verifyEmail();
+        verifyTShirt();
 
     });
 
