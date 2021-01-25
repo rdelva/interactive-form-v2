@@ -23,7 +23,7 @@ title.addEventListener('change', (e) => {
 //check and see if seelct theme is selected
 // if remained as default. set color to Please select a T-shirt theme
 
-
+/*
 const createOption = () => {
     //create option called "Please select a T-shirt theme"
 
@@ -125,7 +125,7 @@ const designChoices = (jsPuns, heartJS) => {
         });
     }
 }
-
+*/
 const registerActivities = () => {
     let price = document.createElement('div');
     price.id ="price"
@@ -473,12 +473,12 @@ const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
     
     submit.addEventListener("click", (e) => {
-        //e.preventDefault();      
         verifyRegActivities();
         verifyPaymentInfo();
         verifyName();
         verifyEmail();
         verifyTShirt();
+        e.preventDefault();      
 
     });
 
