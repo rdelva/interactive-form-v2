@@ -422,10 +422,7 @@ const verifyPaymentInfo = () => {
     const ccvResult = ccvRegex.test(cvv.value);
     
     
-    console.log(ccResult); 
-    console.log(zipResult); 
-    console.log(ccvResult); 
-    
+
 
     if(payment.value == "credit card") {
         //Credit Card Verification
@@ -476,7 +473,7 @@ const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
     
     submit.addEventListener("click", (e) => {
-        e.preventDefault();      
+        //e.preventDefault();      
         verifyRegActivities();
         verifyPaymentInfo();
         verifyName();
