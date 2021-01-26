@@ -32,12 +32,52 @@ const tShirtSelection = () => {
             shirtColors.classList.add('is-hidden');
         } else if (e.target.value == "js puns") {
             shirtColors.classList.remove('is-hidden');
+            themeSelection();
+
         } else {
             shirtColors.classList.remove('is-hidden');
+            themeSelection();
+
         }
 
-    });
+    });   
+
+}
+
+const themeSelection = () => {
+    /*Until a theme is selected from the “Design” menu, no color options 
+    appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”. */
+
+    const colorThemes = document.getElementById("color");
+    const colorOptions = color.querySelectorAll("option"); //gets the list of the color options
+
+    const colorParent = colorOptions[0].parentNode; // selects the parent of the select list
+    console.log(colorParent);
+
+    //Removes the entire option list from the website and makes the dropdown menu empty
+    // Note : list is stored in colorOptions variable
+    for(let i = 0; i < colorOptions.length; i++){
+        colorParent.removeChild(colorOptions[i]);
+    }
     
+    // adds the "Please select a T-shirt theme"
+    const text = "Please select a T-shirt theme";
+    const option = document.createElement("option");
+    option.innerHTML = text;
+    colorThemes.appendChild(option);
+
+    //seperate the colorOptions into two different list
+
+    const jsPuns = [];
+    const jsHeart = [];
+
+
+
+
+
+
+
+
 
 }
 
@@ -392,7 +432,6 @@ const submitAndVerify =  () => {
 
 }
 tShirtSelection();
-
 errorMessages();
 
 
