@@ -32,25 +32,28 @@ const tShirtSelection = () => {
         if(e.target.value == "Select Theme"){
             shirtColors.classList.add('is-hidden');   
         } else {
-            shirtColors.classList.remove('is-hidden');             
+            shirtColors.classList.remove('is-hidden');    
+            createDefaultOption();
+         
         }
     });   
 }
 
 const createDefaultOption = () => {
+
+    const color = document.getElementById("color"); 
+    const options = color.getElementsByTagName("option");
+
+    const parent = options[0].parentNode;
    // adds the "Please select a T-shirt theme" to the top of the list and set it to default
    const text = "Please select a T-shirt theme";
    const defaultOption = document.createElement("option");
    defaultOption.innerHTML = text; 
    
-   const color = document.getElementById("color");
-   const options = color.querySelectorAll("option");
-   const parent = options[0].parentNode;
-
+    
    parent.insertBefore(defaultOption, options[0]);
-   options[0].
 
-  
+    options[0].setAttribute("selected", ""); 
 
 }
 
@@ -465,7 +468,6 @@ const submitAndVerify =  () => {
 //themeSelection();
 
 tShirtSelection();
-createDefaultOption();
 clearOptions();
 errorMessages();
 
