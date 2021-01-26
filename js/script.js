@@ -20,10 +20,31 @@ title.addEventListener('change', (e) => {
     } 
 });
 
+
+const tShirtSelection = () => {
+
+    const shirtColors = document.getElementById("shirt-colors");
+    const shirtDesign = document.getElementById("design");
+    shirtColors.style.display = 'none';
+    shirtDesign.addEventListener('change', (e) => {
+
+        if(e.target.value == "Select Theme"){
+            shirtColors.style.display = 'none';
+        } else if (e.target.value == "js puns") {
+            shirtColors.style.display = 'block';
+        } else {
+            shirtColors.style.display = 'block';
+        }
+
+    });
+    
+
+}
+
 //check and see if seelct theme is selected
 // if remained as default. set color to Please select a T-shirt theme
 
-/*
+
 const createOption = () => {
     //create option called "Please select a T-shirt theme"
 
@@ -46,7 +67,7 @@ const createOption = () => {
 const removeColorList = () => {
   
     //removes the color choices in drop down menu
-    const themes = color.querySelectorAll('[value]'); 
+    const themes = color.querySelectorAll('[value]');     
     const parent = themes[0].parentNode;
     for(let i = 0; i < themes.length; i++ ) {
             parent.removeChild(themes[i]);
@@ -117,7 +138,6 @@ const designChoices = (jsPuns, heartJS) => {
             } else {
                 shirtLegend.style.color = 'red';
                 console.log(shirtLegend);
-
                 removeColorList();
 
             }
@@ -125,7 +145,7 @@ const designChoices = (jsPuns, heartJS) => {
         });
     }
 }
-*/
+
 const registerActivities = () => {
     let price = document.createElement('div');
     price.id ="price"
@@ -483,9 +503,10 @@ const submitAndVerify =  () => {
     });
 
 }
-
+tShirtSelection();
 //createErrorMessage();
 errorMessages();
+
 createOption();
 const shirtColors = removeColorList();
 tShirtColors(shirtColors);
