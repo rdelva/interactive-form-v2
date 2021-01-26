@@ -25,15 +25,15 @@ const tShirtSelection = () => {
 
     const shirtColors = document.getElementById("shirt-colors");
     const shirtDesign = document.getElementById("design");
-    shirtColors.style.display = 'none';
+    shirtColors.classList.add('is-hidden');
     shirtDesign.addEventListener('change', (e) => {
 
         if(e.target.value == "Select Theme"){
-            shirtColors.style.display = 'none';
+            shirtColors.classList.add('is-hidden');
         } else if (e.target.value == "js puns") {
-            shirtColors.style.display = 'block';
+            shirtColors.classList.remove('is-hidden');
         } else {
-            shirtColors.style.display = 'block';
+            shirtColors.classList.remove('is-hidden');
         }
 
     });
