@@ -30,11 +30,11 @@ const tShirtSelection = () => {
     shirtDesign.addEventListener('change', (e) => {
 
         if(e.target.value == "Select Theme"){
-            shirtColors.classList.add('is-hidden');   
+            shirtColors.classList.add('is-hidden');
         } else {
             shirtColors.classList.remove('is-hidden');    
-            createDefaultOption();
-         
+            //createDefaultOption();
+            //clearOptions();  
         }
     });   
 }
@@ -48,38 +48,36 @@ const createDefaultOption = () => {
    // adds the "Please select a T-shirt theme" to the top of the list and set it to default
    const text = "Please select a T-shirt theme";
    const defaultOption = document.createElement("option");
-   defaultOption.innerHTML = text; 
-   
+   defaultOption.innerHTML = text;    
     
    parent.insertBefore(defaultOption, options[0]);
 
-    options[0].setAttribute("selected", ""); 
-
+   options[0].setAttribute("selected", ""); // makes "please select t-shirt theme" the default option
 }
 
 const clearOptions = () => {
-/*
+
     //Until a theme is selected from the “Design” menu, no color options 
     //appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”. 
 
-    const colorThemes = document.getElementById("color");
-    const colorOptions = colorThemes.querySelectorAll("[value]"); //gets the list of the color options
-    const colorParent = colorOptions[0].parentNode; // selects the parent of the select list
-    console.log(colorParent);
-
+    const color = document.getElementById("color");
+    const colorOptions = color.querySelectorAll("option[value]"); //gets the list of the color options    
+    const colorParent = colorOptions[0].parentNode; // selects the parent of the select list 
+    
     //Removes the entire option list from the website and makes the dropdown menu empty
     // Note : list is stored in colorOptions variable
     for(let i = 0; i < colorOptions.length; i++){
         colorParent.removeChild(colorOptions[i]);
     }
- */   
+
+    themeSelection(colorOptions);
 }
 
-const themeSelection = () => {
+const themeSelection = (colorOptions) => {
+    console.log(colorOptions);
+    console.log(designChoice);
  
 
- 
- 
 
     //seperate the colorOptions into two different list
 
@@ -87,9 +85,8 @@ const themeSelection = () => {
     const jsHeart = [];
 
     //if user selects JS Puns
-        const designChoice =  document.getElementById("design");
-        console.log(designChoice.value);
-        if(designChoice.value == "js puns"){
+      
+      /*   if(designChoice.value == "js puns"){
             for(let i = 0; i < colorOptions.length; i++) {
                 if(colorOptions[i].innerHTML.includes('JS Puns shirt only')){
                     colorThemes.appendChild(colorOptions[i]);
@@ -101,14 +98,7 @@ const themeSelection = () => {
                     colorThemes.appendChild(colorOptions[i]);
                 }               
             }
-        }
-
-
-
-
-
-
-
+        }*/
 
 
 }
@@ -468,6 +458,7 @@ const submitAndVerify =  () => {
 //themeSelection();
 
 tShirtSelection();
+createDefaultOption();
 clearOptions();
 errorMessages();
 
