@@ -25,32 +25,42 @@ const tShirtSelection = () => {
 
     const shirtColors = document.getElementById("shirt-colors");
     const shirtDesign = document.getElementById("design");
+
     shirtColors.classList.add('is-hidden');
     shirtDesign.addEventListener('change', (e) => {
 
         if(e.target.value == "Select Theme"){
-            shirtColors.classList.add('is-hidden');
-        } else if (e.target.value == "js puns") {
-            shirtColors.classList.remove('is-hidden');
-            themeSelection();
-
+            shirtColors.classList.add('is-hidden');   
         } else {
-            shirtColors.classList.remove('is-hidden');
-            themeSelection();
-
+            shirtColors.classList.remove('is-hidden');             
         }
-
     });   
+}
+
+const createDefaultOption = () => {
+   // adds the "Please select a T-shirt theme" to the top of the list and set it to default
+   const text = "Please select a T-shirt theme";
+   const defaultOption = document.createElement("option");
+   defaultOption.innerHTML = text; 
+   
+   const color = document.getElementById("color");
+   const options = color.querySelectorAll("option");
+   const parent = options[0].parentNode;
+
+   parent.insertBefore(defaultOption, options[0]);
+   options[0].
+
+  
 
 }
 
-const themeSelection = () => {
-    /*Until a theme is selected from the “Design” menu, no color options 
-    appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”. */
+const clearOptions = () => {
+/*
+    //Until a theme is selected from the “Design” menu, no color options 
+    //appear in the “Color” drop down and the “Color” field reads “Please select a T-shirt theme”. 
 
     const colorThemes = document.getElementById("color");
-    const colorOptions = color.querySelectorAll("option"); //gets the list of the color options
-
+    const colorOptions = colorThemes.querySelectorAll("[value]"); //gets the list of the color options
     const colorParent = colorOptions[0].parentNode; // selects the parent of the select list
     console.log(colorParent);
 
@@ -59,17 +69,36 @@ const themeSelection = () => {
     for(let i = 0; i < colorOptions.length; i++){
         colorParent.removeChild(colorOptions[i]);
     }
-    
-    // adds the "Please select a T-shirt theme"
-    const text = "Please select a T-shirt theme";
-    const option = document.createElement("option");
-    option.innerHTML = text;
-    colorThemes.appendChild(option);
+ */   
+}
+
+const themeSelection = () => {
+ 
+
+ 
+ 
 
     //seperate the colorOptions into two different list
 
     const jsPuns = [];
     const jsHeart = [];
+
+    //if user selects JS Puns
+        const designChoice =  document.getElementById("design");
+        console.log(designChoice.value);
+        if(designChoice.value == "js puns"){
+            for(let i = 0; i < colorOptions.length; i++) {
+                if(colorOptions[i].innerHTML.includes('JS Puns shirt only')){
+                    colorThemes.appendChild(colorOptions[i]);
+                }               
+            }
+        } else {
+            for(let i = 0; i < colorOptions.length; i++) {
+                if(!colorOptions[i].innerHTML.includes('JS Puns shirt only')){
+                    colorThemes.appendChild(colorOptions[i]);
+                }               
+            }
+        }
 
 
 
@@ -431,7 +460,13 @@ const submitAndVerify =  () => {
     });
 
 }
+
+
+//themeSelection();
+
 tShirtSelection();
+createDefaultOption();
+clearOptions();
 errorMessages();
 
 
