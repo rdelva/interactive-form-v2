@@ -32,7 +32,7 @@ const tShirtSelection = () => {
         if(e.target.value == "Select Theme"){
             shirtColors.classList.add('is-hidden');
         } else {
-            shirtColors.classList.remove('is-hidden');    
+            shirtColors.classList.remove('is-hidden');
             //createDefaultOption();
             //clearOptions();  
         }
@@ -69,38 +69,79 @@ const clearOptions = () => {
     for(let i = 0; i < colorOptions.length; i++){
         colorParent.removeChild(colorOptions[i]);
     }
-
-    themeSelection(colorOptions);
 }
 
-const themeSelection = (colorOptions) => {
-    console.log(colorOptions);
-    console.log(designChoice);
- 
 
 
+const themeSelection = () => {
+    const color = document.getElementById("color");
+
+    const colorOptions = color.querySelectorAll("option[value]"); //gets the list of the color options    
+
+   
     //seperate the colorOptions into two different list
 
-    const jsPuns = [];
-    const jsHeart = [];
+    const jsPunsList = [];
+    const jsHeartList = [];
 
-    //if user selects JS Puns
-      
-      /*   if(designChoice.value == "js puns"){
-            for(let i = 0; i < colorOptions.length; i++) {
-                if(colorOptions[i].innerHTML.includes('JS Puns shirt only')){
-                    colorThemes.appendChild(colorOptions[i]);
-                }               
-            }
+    for(let i = 0; i < colorOptions.length; i++){
+        if(colorOptions[i].innerHTML.includes('JS Puns')){
+            jsPunsList.push(colorOptions[i]);
         } else {
-            for(let i = 0; i < colorOptions.length; i++) {
-                if(!colorOptions[i].innerHTML.includes('JS Puns shirt only')){
-                    colorThemes.appendChild(colorOptions[i]);
-                }               
+            jsHeartList.push(colorOptions[i]);
+        }
+    }
+
+   
+   //if user selects JS Puns or JS Heart
+
+      const design = document.getElementById("design");  
+      const optionList = color.getElementsByTagName("option");
+
+      colorParent = optionList[0].parentNode;
+  
+
+      design.addEventListener('change', (e)=> {
+        const selectedTheme  = e.target.value;  //theme shirt that the user selected
+        console.log(selectedTheme);
+
+        if(selectedTheme == "js puns"){
+            //check to see if the default option is the only one listed there
+            if(optionList.length == 1){
+                //add the jsPuns list underneath the default option
+                for(let i = 0; i < jsPunsList.length; i++){
+                    color.appendChild(jsPunsList[i]);
+                }
+            } else {
+                //if there are items in the list. Clear it out using clearOptions()
+                //then repopulate the list
+                clearOptions();
+                //add the jsPuns list underneath the default option
+                for(let i = 0; i < jsPunsList.length; i++){
+                    color.appendChild(jsPunsList[i]);
+                }
             }
-        }*/
+        } else if (selectedTheme == "heart js"){
+            if(optionList.length == 1){
+                //add the jsHeart list underneath the default option
+                for(let i = 0; i < jsHeartList.length; i++){
+                    color.appendChild(jsHeartList[i]);
+                }
+            } else {
+                  //if there are items in the list. Clear it out using clearOptions()
+                //then repopulate the list
+                clearOptions();
+                //add the jsHeart list underneath the default option
+                for(let i = 0; i < jsHeartList.length; i++){
+                    color.appendChild(jsHeartList[i]);
+                }
+            }
+        } 
+        
 
+      }); // end of the design addEventListener
 
+      
 }
 
 const registerActivities = () => {
@@ -459,7 +500,7 @@ const submitAndVerify =  () => {
 
 tShirtSelection();
 createDefaultOption();
-clearOptions();
+themeSelection();
 errorMessages();
 
 
