@@ -305,6 +305,7 @@ const verifyName  = () => {
     const nameLabel = document.querySelector("[for=name]");
     const nameErrorMessage = document.querySelector(".nameError");
 
+    const basicInfoLegend = nameLabel.previousElementSibling;
 
     //console.log(name.value);
     const nameRegex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
@@ -315,14 +316,18 @@ const verifyName  = () => {
     //checks to see if name is blank
     if(name.value == "" || nameRegex.test(name.value) == false){
         nameLabel.style.color = "red";
+        basicInfoLegend.style.color = "red";
         name.style.border = "red";
         nameErrorMessage.style.display = 'block';
+        
         
 
 
     } else {
         nameLabel.style.color = "black";
         name.style.border = "black";
+        basicInfoLegend.style.color = "black";
+
         nameErrorMessage.style.display = 'none';
        
     }
@@ -362,7 +367,8 @@ const verifyEmail = () => {
         mail.style.border = "black";
     }
 
-
+    //validation to allow the form to go through for it to submit.
+  
 }
 
 
@@ -482,15 +488,27 @@ const realTimeChecking  = () => {
 
 const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
+    const form = document.querySelector("form");
+
+
     
     submit.addEventListener("click", (e) => {
+
+        
+                   
+     
         verifyRegActivities();
         verifyPaymentInfo();
         verifyName();
         verifyEmail();
         verifyTShirt();
-        e.preventDefault();      
+        e.preventDefault();
 
+       /* if(verifyEmail() == true) {
+            form.submit();
+       } else {
+           e.preventDefault();
+       }*/
     });
 
 }
@@ -502,9 +520,6 @@ tShirtSelection();
 createDefaultOption();
 themeSelection();
 errorMessages();
-
-
-
 registerActivities();
 paymentInfo();
 realTimeChecking();
