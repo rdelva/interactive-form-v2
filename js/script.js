@@ -394,7 +394,7 @@ const verifyRegActivities = () => {
         legend.style.color = "black";
 
     }
-
+   
     
 }
 
@@ -413,6 +413,7 @@ const verifyTShirt = () => {
         shirtLegend.style.color ="black";
 
     }
+
 
 }
 
@@ -447,7 +448,11 @@ const verifyPaymentInfo = () => {
             legend.style.color = 'black';
         // console.log ("turns black");
         } else {        
-            legend.style.color = 'red';           
+            legend.style.color = 'red';
+            
+            if(ccResult == false){
+                ccNum.style.color = 'red';
+            }
         }
     } else if (payment.value == "paypal"){
         legend.style.color = 'black';    
@@ -494,21 +499,42 @@ const submitAndVerify =  () => {
     
     submit.addEventListener("click", (e) => {
 
-        
-                   
-     
         verifyRegActivities();
         verifyPaymentInfo();
         verifyName();
         verifyEmail();
         verifyTShirt();
-        e.preventDefault();
 
-       /* if(verifyEmail() == true) {
+        
+        //Selects all the legend tags within the form
+        const legendList =  document.querySelectorAll("legend");
+        let errorCounter = 0;
+        
+        /* 
+            The four loop checks to see if color style is red. The red color signifys 
+            there is an error in that particular section. This counter will check to see how many of the legends are red.
+        */
+        for(let i= 0; i < legendList.length; i++){
+            if(legendList[i].style.color == 'red'){
+                errorCounter++;
+            }
+        }
+
+        /*
+            If there are no red legends the form will submit if not it will not submit.
+        */
+
+        if(errorCounter == 0){
             form.submit();
-       } else {
-           e.preventDefault();
-       }*/
+            console.log("Form submitted");
+    
+
+        } else {
+            e.preventDefault();
+            console.log("Please fix the errors in your form");
+        }
+
+  
     });
 
 }
