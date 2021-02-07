@@ -292,6 +292,8 @@ const errorMessages = () => {
         const emailErrorMessage = document.querySelector(".emailErrorMessage");
         emailErrorMessage.style.display = 'none';
 
+        //error Message for Payment Section
+
 
 }
 
@@ -438,21 +440,46 @@ const verifyPaymentInfo = () => {
     const ccResult = ccRegex.test(ccNum.value);
     const zipResult = zipRegex.test(zip.value);
     const ccvResult = ccvRegex.test(cvv.value);
-    
+
+
+    const ccNumLabel = document.querySelector("[for='cc-num']");
+    const zipLabel = document.querySelector("[for='zip']");
+    const cvvLabel = document.querySelector("[for='cvv]");
+
     
 
 
     if(payment.value == "credit card") {
         //Credit Card Verification
+        
         if(ccResult == true && zipResult == true && ccvResult == true){
             legend.style.color = 'black';
         // console.log ("turns black");
         } else {        
             legend.style.color = 'red';
             
+           //Credit Card Num Error 
             if(ccResult == false){
-                ccNum.style.color = 'red';
+                ccNumLabel.style.color = 'red';
+            } else {
+                ccNumLabel.style.color = 'black';
             }
+          
+            //Zip Code Error
+            if(zipResult == false){
+                zipLabel.style.color = 'red';
+            } else {
+                zipLabel.style.color = 'black';
+            }
+           
+           //CCV Code Error
+           if(ccvResult == false){
+                cvvLabel.style.color = 'red';
+           } else {
+                cvvLabel.style.color = 'black';
+            }
+            
+
         }
     } else if (payment.value == "paypal"){
         legend.style.color = 'black';    
