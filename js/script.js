@@ -435,7 +435,7 @@ const verifyPaymentInfo = () => {
 
     const ccRegex = /[0-9]{13,16}/;
     const zipRegex = /[0-9]{5}/;
-    const ccvRegex  = /[0-9]{3}/
+    const ccvRegex  = /[0-9]{3}/;
 
     const ccResult = ccRegex.test(ccNum.value);
     const zipResult = zipRegex.test(zip.value);
@@ -454,7 +454,6 @@ const verifyPaymentInfo = () => {
         
         if(ccResult == true && zipResult == true && ccvResult == true){
             legend.style.color = 'black';
-        // console.log ("turns black");
         } else {        
             legend.style.color = 'red';
             
@@ -472,14 +471,12 @@ const verifyPaymentInfo = () => {
                 zipLabel.style.color = 'black';
             }
            
-           //CCV Code Error
+            //CCV Code Error
            if(ccvResult == false){
                 cvvLabel.style.color = 'red';
            } else {
                 cvvLabel.style.color = 'black';
-            }
-            
-
+            }         
         }
     } else if (payment.value == "paypal"){
         legend.style.color = 'black';    
@@ -488,6 +485,10 @@ const verifyPaymentInfo = () => {
     } else {
         legend.style.color = 'red';
     }
+
+  
+
+
 
 }
 
@@ -510,7 +511,6 @@ const realTimeChecking  = () => {
    
    activities.addEventListener('change', (e) => {
         if(e.target.tagName == 'INPUT'){    
-           // console.log("Hi");
             verifyRegActivities();
             
         }
@@ -520,8 +520,7 @@ const realTimeChecking  = () => {
 
 const submitAndVerify =  () => {
     const submit = document.querySelector("[type = submit]");
-    const form = document.querySelector("form");
-
+    //const form = document.querySelector("form");
 
     
     submit.addEventListener("click", (e) => {
@@ -537,24 +536,23 @@ const submitAndVerify =  () => {
         const legendList =  document.querySelectorAll("legend");
         let errorCounter = 0;
         
-        /* 
-            The four loop checks to see if color style is red. The red color signifys 
-            there is an error in that particular section. This counter will check to see how many of the legends are red.
-        */
+        /* The four loop checks to see if color style is red. The red color signifys 
+            there is an error in that particular section. 
+            This counter will check to see how many of the legends are red.
+         */ 
         for(let i= 0; i < legendList.length; i++){
             if(legendList[i].style.color == 'red'){
                 errorCounter++;
             }
         }
 
-        /*
-            If there are no red legends the form will submit if not it will not submit.
+        /* If there are no red legends the form will submit
+           if not it will not submit.
         */
 
-        if(errorCounter == 0){
-            form.submit();
+        if(errorCounter == 0){        
+            submit();
             console.log("Form submitted");
-    
 
         } else {
             e.preventDefault();
@@ -565,9 +563,6 @@ const submitAndVerify =  () => {
     });
 
 }
-
-
-//themeSelection();
 
 tShirtSelection();
 createDefaultOption();
