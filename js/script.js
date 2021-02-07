@@ -455,28 +455,29 @@ const verifyPaymentInfo = () => {
         if(ccResult == true && zipResult == true && ccvResult == true){
             legend.style.color = 'black';
         } else {        
-            legend.style.color = 'red';
-            
-           //Credit Card Num Error 
-            if(ccResult == false){
-                ccNumLabel.style.color = 'red';
-            } else {
-                ccNumLabel.style.color = 'black';
-            }
-          
-            //Zip Code Error
-            if(zipResult == false){
-                zipLabel.style.color = 'red';
-            } else {
-                zipLabel.style.color = 'black';
-            }
-           
-            //CCV Code Error
-           if(ccvResult == false){
-                cvvLabel.style.color = 'red';
-           } else {
-                cvvLabel.style.color = 'black';
-            }         
+            legend.style.color = 'red';        
+                   
+            //Credit Card Num Error 
+                    if(ccResult == false){
+                        ccNumLabel.style.color = 'red';
+                    } else {
+                        ccNumLabel.style.color = 'black';
+                    }
+                
+                    //Zip Code Error
+                    if(zipResult == false){
+                        zipLabel.style.color = 'red';
+                    } else {
+                        zipLabel.style.color = 'black';
+                    }
+                
+                    //CCV Code Error
+                    if(ccvResult == false){
+                            cvvLabel.style.color = 'red';
+                    } else {
+                            cvvLabel.style.color = 'black';
+                    }
+                              
         }
     } else if (payment.value == "paypal"){
         legend.style.color = 'black';    
@@ -485,9 +486,6 @@ const verifyPaymentInfo = () => {
     } else {
         legend.style.color = 'red';
     }
-
-  
-
 
 
 }
