@@ -293,11 +293,35 @@ const errorMessages = () => {
         emailErrorMessage.style.display = 'none';
 
         //error Message for Payment Section
+        const ccSection = document.querySelector('#credit-card');
+        const  parentCC = ccSection.parentNode;
+        const divCC = document.createElement('div');
+        const divZip = document.createElement('div');
+        const divCvv = document.createElement('div');
 
+        parentCC.insertBefore(divCC,ccSection);
+        parentCC.insertBefore(divZip,ccSection);
+        parentCC.insertBefore(divCvv,ccSection);
+        
+        divCC.innerHTML = `Please enter a valid credit card number`;
+        divZip.innerHTML = `Please enter a valid zipcode`;
+        divCvv.innerHTML = `Please enter a valid CVV`;
+
+        divCC.classList.add('errorMessage');
+        divCC.classList.add('is-hidden');
+        divCC.id = 'ccNumErrorMessage';
+
+        divZip.classList.add('errorMessage');
+        divZip.classList.add('is-hidden');
+        divZip.id = 'zipErrorMessage';
+
+        divCvv.classList.add('errorMessage');
+        divCvv.classList.add('is-hidden');
+        divCvv.id = 'ccvErrorMessage';
+      
+        
 
 }
-
-
 
 
 
@@ -444,9 +468,9 @@ const verifyPaymentInfo = () => {
     const cvv = document.getElementById("cvv");
 
 
-    const ccRegex = /[0-9]{13,16}/;
+    const ccRegex = /^\d{13,16}$/;
     const zipRegex = /[0-9]{5}/;
-    const ccvRegex  = /[0-9]{3}/;   ///[0-9]{3}/
+    const ccvRegex  = /\d{3}/;   //[0-9]{3}
 
     const ccResult = ccRegex.test(ccNum.value);
     const zipResult = zipRegex.test(zip.value);
@@ -457,7 +481,12 @@ const verifyPaymentInfo = () => {
     const zipLabel = document.querySelector("[for='zip']");
     const cvvLabel = document.querySelector("[for='cvv']");
 
-    let ccIsValid = "";
+
+    //ErrorMessages Labels
+    const ccError = document.getElementById('ccNumErrorMessage');
+    const zipError = document.getElementById('zipErrorMessage');
+    const ccvError = document.getElementById('ccvErrorMessage');
+
     let paymentIsValid = ""
     
 
@@ -469,6 +498,16 @@ const verifyPaymentInfo = () => {
             legend.style.color = 'black';
             paymentIsValid = true;
 
+            const errorMessages  = document.querySelectorAll('.errorMessage');
+            //Make on the labels black and hide messages if its true
+            for(let i = 0; i < errorMessages.length; i++){
+                errorMessages[i].classList.add("is-hidden");
+            }
+
+            ccNumLabel.style.color = 'black'
+            zipLabel.style.color = 'black'
+            cvvLabel.style.color = 'black'
+
         } else {        
             legend.style.color = 'red'; 
             paymentIsValid = false       
@@ -476,22 +515,28 @@ const verifyPaymentInfo = () => {
             //Credit Card Num Error 
                     if(ccResult == false){
                         ccNumLabel.style.color = 'red';
+                        ccError.classList.remove('is-hidden');
                     } else {
                         ccNumLabel.style.color = 'black';
-                    }
+                        ccError.classList.add('is-hidden');
+                    }   
                 
                     //Zip Code Error
                     if(zipResult == false){
                         zipLabel.style.color = 'red';
+                        zipError.classList.remove('is-hidden');
                     } else {
                         zipLabel.style.color = 'black';
+                        zipError.classList.add('is-hidden');
                     }
                 
                     //CCV Code Error
                      if(ccvResult == false){
                         cvvLabel.style.color = 'red';
+                        ccvError.classList.remove('is-hidden');
                     } else {
                          cvvLabel.style.color = 'black';
+                         ccvError.classList.add('is-hidden');
                     }
                               
         }
