@@ -103,7 +103,7 @@ const themeSelection = () => {
 
       design.addEventListener('change', (e)=> {
         const selectedTheme  = e.target.value;  //theme shirt that the user selected
-        console.log(selectedTheme);
+        //console.log(selectedTheme);
 
         if(selectedTheme == "js puns"){
             //check to see if the default option is the only one listed there
@@ -311,6 +311,7 @@ const verifyName  = () => {
 
     //console.log(name.value);
     const nameRegex = /^[A-Za-z][A-Za-z\'\-]+([\ A-Za-z][A-Za-z\'\-]+)*/;
+    let nameIsValid = "";
 
     //console.log(nameRegex.test(name.value));
 
@@ -321,7 +322,7 @@ const verifyName  = () => {
         basicInfoLegend.style.color = "red";
         name.style.border = "red";
         nameErrorMessage.style.display = 'block';
-        
+        nameIsValid = false;   
         
 
 
@@ -329,11 +330,12 @@ const verifyName  = () => {
         nameLabel.style.color = "black";
         name.style.border = "black";
         basicInfoLegend.style.color = "black";
-
         nameErrorMessage.style.display = 'none';
+        nameIsValid = true;   
+
        
     }
-   
+   return nameIsValid;
 }
 
 const verifyEmail = () => {
@@ -341,18 +343,20 @@ const verifyEmail = () => {
     const mail = document.getElementById("mail");
     const mailLabel = document.querySelector("[for=mail]");   
     const emailErrorMessage = document.querySelector(".emailErrorMessage");
+    let emailIsValid = "";
 
     //checks to see if email is blank
     if(mail.value == ""){
         mailLabel.style.color = "red";
         mail.style.border = "red";
         emailErrorMessage.style.display = 'block';
+        emailIsValid = false;
 
     }else {
         mailLabel.style.color = "black";
         mail.style.border = "black";
         emailErrorMessage.style.display = 'none';
-
+        emailIsValid = true;
     }
 
     //check to see if email is valid
@@ -364,13 +368,14 @@ const verifyEmail = () => {
     if (emailRegex.test(mail.value) == false){
         mailLabel.style.color = "red";
         mail.style.border = "red";
+        emailIsValid = false;
     } else {
         mailLabel.style.color = "black";
         mail.style.border = "black";
+        emailIsValid = true;
     }
 
-    //validation to allow the form to go through for it to submit.
-  
+    return emailIsValid;    
 }
 
 
@@ -379,6 +384,7 @@ const verifyRegActivities = () => {
     const activities =  document.querySelector('.activities'); 
     const activityListItems = activities.querySelectorAll("input");
     const legend = activities.querySelector("legend");
+    let   regActValid = ""; 
 
     let checked = 0; //keeps track of how many items was checked
 
@@ -391,13 +397,15 @@ const verifyRegActivities = () => {
     if(checked == 0) {
         //console.log("no item was checked");
         legend.style.color = "red";
+        regActValid = false;
     } else {
        // console.log(`${checked} items was checked`);
         legend.style.color = "black";
+        regActValid = true;
 
     }
    
-    
+    return regActValid;
 }
 
 //Verifys if a t-shirt was selected
@@ -405,18 +413,21 @@ const verifyTShirt = () => {
     const shirtSection = document.querySelector(".shirt");
     const shirtLegend = shirtSection.querySelector("legend");
     const shirtColor = document.querySelector("#color");
+    let shirtIsValid = "";
 
 
     const design = document.querySelector("#design");
    
     if(design.value == "Select Theme" || shirtColor.value == "Please select a T-shirt theme") {
         shirtLegend.style.color ="red";
+        shirtIsValid = false;
     } else {
         shirtLegend.style.color ="black";
+        shirtIsValid = true;
 
     }
 
-
+    return shirtIsValid;
 }
 
 //checks if the Payment Info was selected
@@ -435,7 +446,7 @@ const verifyPaymentInfo = () => {
 
     const ccRegex = /[0-9]{13,16}/;
     const zipRegex = /[0-9]{5}/;
-    const ccvRegex  = /[0-9]{3}/;
+    const ccvRegex  = /[0-9]{3}/;   ///[0-9]{3}/
 
     const ccResult = ccRegex.test(ccNum.value);
     const zipResult = zipRegex.test(zip.value);
@@ -444,8 +455,10 @@ const verifyPaymentInfo = () => {
 
     const ccNumLabel = document.querySelector("[for='cc-num']");
     const zipLabel = document.querySelector("[for='zip']");
-    const cvvLabel = document.querySelector("[for='cvv]");
+    const cvvLabel = document.querySelector("[for='cvv']");
 
+    let ccIsValid = "";
+    let paymentIsValid = ""
     
 
 
@@ -454,8 +467,11 @@ const verifyPaymentInfo = () => {
         
         if(ccResult == true && zipResult == true && ccvResult == true){
             legend.style.color = 'black';
+            paymentIsValid = true;
+
         } else {        
-            legend.style.color = 'red';        
+            legend.style.color = 'red'; 
+            paymentIsValid = false       
                    
             //Credit Card Num Error 
                     if(ccResult == false){
@@ -472,21 +488,26 @@ const verifyPaymentInfo = () => {
                     }
                 
                     //CCV Code Error
-                    if(ccvResult == false){
-                            cvvLabel.style.color = 'red';
+                     if(ccvResult == false){
+                        cvvLabel.style.color = 'red';
                     } else {
-                            cvvLabel.style.color = 'black';
+                         cvvLabel.style.color = 'black';
                     }
                               
         }
     } else if (payment.value == "paypal"){
-        legend.style.color = 'black';    
+        legend.style.color = 'black';
+        paymentIsValid = true;    
     } else if (payment.value == "bitcoin"){
         legend.style.color = 'black'; 
+        paymentIsValid = true;
     } else {
         legend.style.color = 'red';
+        paymentIsValid = false;
+
     }
 
+    return paymentIsValid;
 
 }
 
@@ -517,49 +538,32 @@ const realTimeChecking  = () => {
 
 
 const submitAndVerify =  () => {
-    const submit = document.querySelector("[type = submit]");
-    //const form = document.querySelector("form");
+    const form = document.querySelector("form");
+   
+    form.addEventListener("submit", (e) => {
 
-    
-    submit.addEventListener("click", (e) => {
 
-        verifyRegActivities();
-        verifyPaymentInfo();
-        verifyName();
-        verifyEmail();
-        verifyTShirt();
-
-        
-        //Selects all the legend tags within the form
-        const legendList =  document.querySelectorAll("legend");
-        let errorCounter = 0;
-        
-        /* The four loop checks to see if color style is red. The red color signifys 
-            there is an error in that particular section. 
-            This counter will check to see how many of the legends are red.
-         */ 
-        for(let i= 0; i < legendList.length; i++){
-            if(legendList[i].style.color == 'red'){
-                errorCounter++;
-            }
-        }
-
-        /* If there are no red legends the form will submit
-           if not it will not submit.
-        */
-
-        if(errorCounter == 0){        
-            submit();
-            console.log("Form submitted");
-
-        } else {
+        if(!verifyName()) {
             e.preventDefault();
-            console.log("Please fix the errors in your form");
+        } 
+
+        if(!verifyEmail()) {
+            e.preventDefault();
         }
 
-  
-    });
+        if(!verifyTShirt()) {
+            e.preventDefault();
+        }
 
+        if(!verifyRegActivities()) {
+            e.preventDefault();
+        }
+
+        if(!verifyPaymentInfo()) {
+            e.preventDefault();
+        }
+
+    });
 }
 
 tShirtSelection();
